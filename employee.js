@@ -208,49 +208,49 @@ const viewEmployees = () => {
     }
   );
 };
-const viewManager = () => {
-  connection.query(
-    `SELECT e.id, e.first_name, e.last_name, r.title, r.salary,COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN role AS r ON e.role_id = r.id LEFT JOIN department AS d ON r.department_id = d.id LEFT JOIN employee AS m ON m.id = e.manager_id`,
-    (err, res) => {
-      if (err) {
-        throw err;
-      } else {
-        console.table(res);
-        mainMenu();
-      }
-    }
-  );
-};
-const addManager = () => {
-    inquirer
-      .prompt({
-        name: "addManager",
-        type: "input",
-        message: "What is this manager's name?",
-        // Validates that the user did not leave this field blank
-        validate: function (answer) {
-          if (answer === "") {
-            console.log("The manager must have a name.");
-            return false;
-          } else {
-            return true;
-          }
-        },
-      })
-      .then((answer) => {
-        connection.query(
-          `INSERT INTO department (name)
-              VALUES ("${answer.addManager}")`,
-          (err, res) => {
-            if (err) throw err;
-            console.log(
-              `\n ${answer.addManager} has been added as Manager to the company.\n `
-            );
-            mainMenu();
-          }
-        );
-      });
-  };
+// const viewManager = () => {
+//   connection.query(
+//     `SELECT e.id, e.first_name, e.last_name, r.title, r.salary,COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN role AS r ON e.role_id = r.id LEFT JOIN department AS d ON r.department_id = d.id LEFT JOIN employee AS m ON m.id = e.manager_id`,
+//     (err, res) => {
+//       if (err) {
+//         throw err;
+//       } else {
+//         console.table(res);
+//         mainMenu();
+//       }
+//     }
+//   );
+// };
+// const addManager = () => {
+//     inquirer
+//       .prompt({
+//         name: "addManager",
+//         type: "input",
+//         message: "What is this manager's name?",
+//         // Validates that the user did not leave this field blank
+//         validate: function (answer) {
+//           if (answer === "") {
+//             console.log("The manager must have a name.");
+//             return false;
+//           } else {
+//             return true;
+//           }
+//         },
+//       })
+//       .then((answer) => {
+//         connection.query(
+//           `INSERT INTO department (name)
+//               VALUES ("${answer.addManager}")`,
+//           (err, res) => {
+//             if (err) throw err;
+//             console.log(
+//               `\n ${answer.addManager} has been added as Manager to the company.\n `
+//             );
+//             mainMenu();
+//           }
+//         );
+//       });
+//   };
 const addDepartment = () => {
   inquirer
     .prompt({
