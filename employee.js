@@ -18,17 +18,17 @@ const mainMenu = () => {
   inquirer
     .prompt({
       type: "list",
-      name: "mainMenu",
+      name: "menu",
       message: "What would you like to do?",
       choices: [
-        "View All Employees",
         "Add Employee",
+        "View All Employees",
         "Add Department",
         "View Departments",
         "Add Employee Role",
         "View Employee Roles",
         "Update Employee Role",
-        "Update Employees' Manager",
+        "Update Employees' Manager", 
         "View Employees by Their Manager",
         "Delete Department",
         "Delete Employee Roles",
@@ -38,7 +38,7 @@ const mainMenu = () => {
       ],
     })
     .then((answer) => {
-      switch (answer.mainMenu) {
+      switch (answer.menu) {
         case "Add Employee":
           addEmployee();
           break;
@@ -66,15 +66,18 @@ const mainMenu = () => {
         case "View Employees by Their Manager":
           viewEmployeeManager();
           break;
-        case "View a Department's Budget":
-          depBudget();
+        case "Delete Department":
+          deleteDept();
+          break;
+        case "Delete Role":
+          deleteRole();
           break;
         case "Delete Employee":
           deleteEmployee();
           break;
-        case "Delete Department":
-          deleteDept();
-          break;
+        case "View a Department's Budget":
+          depBudget();
+          break;    
         case "Exit Application":
           connection.end();
           break;
@@ -89,7 +92,7 @@ const addEmployee = () => {
       {
         name: "empFirstName",
         type: "input",
-        message: "What is this employee's first name?",
+        message: "What is the employee's first name?",
         // Validates that the user did not leave this field blank
         validate: function (answer) {
           if (answer === "") {
@@ -103,7 +106,7 @@ const addEmployee = () => {
       {
         name: "empLastName",
         type: "input",
-        message: "What is this employee's last name?",
+        message: "What is the employee's last name?",
         // Validates that the user put in a last name for the employee
         validate: function (answer) {
           if (answer === "") {
@@ -208,49 +211,49 @@ const viewEmployees = () => {
     }
   );
 };
-// const viewManager = () => {
-//   connection.query(
-//     `SELECT e.id, e.first_name, e.last_name, r.title, r.salary,COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN role AS r ON e.role_id = r.id LEFT JOIN department AS d ON r.department_id = d.id LEFT JOIN employee AS m ON m.id = e.manager_id`,
-//     (err, res) => {
-//       if (err) {
-//         throw err;
-//       } else {
-//         console.table(res);
-//         mainMenu();
-//       }
-//     }
-//   );
-// };
-// const addManager = () => {
-//     inquirer
-//       .prompt({
-//         name: "addManager",
-//         type: "input",
-//         message: "What is this manager's name?",
-//         // Validates that the user did not leave this field blank
-//         validate: function (answer) {
-//           if (answer === "") {
-//             console.log("The manager must have a name.");
-//             return false;
-//           } else {
-//             return true;
-//           }
-//         },
-//       })
-//       .then((answer) => {
-//         connection.query(
-//           `INSERT INTO department (name)
-//               VALUES ("${answer.addManager}")`,
-//           (err, res) => {
-//             if (err) throw err;
-//             console.log(
-//               `\n ${answer.addManager} has been added as Manager to the company.\n `
-//             );
-//             mainMenu();
-//           }
-//         );
-//       });
-//   };
+const viewManager = () => {
+  connection.query(
+    `SELECT e.id, e.first_name, e.last_name, r.title, r.salary,COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN role AS r ON e.role_id = r.id LEFT JOIN department AS d ON r.department_id = d.id LEFT JOIN employee AS m ON m.id = e.manager_id`,
+    (err, res) => {
+      if (err) {
+        throw err;
+      } else {
+        console.table(res);
+        mainMenu();
+      }
+    }
+  );
+};
+const addManager = () => {
+    inquirer
+      .prompt({
+        name: "addManager",
+        type: "input",
+        message: "What is this manager's name?",
+        // Validates that the user did not leave this field blank
+        validate: function (answer) {
+          if (answer === "") {
+            console.log("The manager must have a name.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      })
+      .then((answer) => {
+        connection.query(
+          `INSERT INTO department (name)
+              VALUES ("${answer.addManager}")`,
+          (err, res) => {
+            if (err) throw err;
+            console.log(
+              `\n ${answer.addManager} has been added as Manager to the company.\n `
+            );
+            mainMenu();
+          }
+        );
+      });
+  };
 const addDepartment = () => {
   inquirer
     .prompt({
@@ -544,5 +547,6 @@ const deleteDept = () => {
 connection.connect((err) => {
   if (err) throw err;
   // run the mainMenu function after the connection is made to start the application
+  console.log(`connected as id ${connection.threadId}`);
   mainMenu();
 });
