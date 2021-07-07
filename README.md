@@ -1,1 +1,23 @@
 # Employee-Tracker
+
+* This is a command line application that allows the business owner to work with the data input into MySQL. The owner will be able to add, view, and update the employee, their role, and their department.
+
+## User Story
+
+* As a business owner, I want to be able to view add and manage employees, their roles, and each department.
+
+* Being able to manage multiple facesets of the business will allow me to be organized and successful.
+
+## Get Started
+
+* Below you will see a short video of how the web application will work.
+
+![Employee Tracker](assets/employee-tracker.gif)
+
+## Note and Link
+
+* This node.js app utilizes node.js, inquirer, and MySQL to allow you to create the employees, roles, and departments needed for your business. This web application is stored on the Github.com platform.
+
+* Also included is a `seed.sql` file to pre-populate the database. This makes the development of individual features much easier.
+
+* You can also reach the app using this link to Heroku: [Unique-Tech-Blog](https://unique-tech-blog.herokuapp.com/)
