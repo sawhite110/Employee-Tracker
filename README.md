@@ -10,13 +10,13 @@
 
 ## Get Started
 
-* Below you will see a short video of how the web application will work.
+* Below you will see a short video example of how the web application will work.
 
 ![Employee Tracker](assets/employee-tracker.gif)
 
 ## Note and Link
 
-* This node.js app utilizes node.js, inquirer, and MySQL to allow you to create the employees, roles, and departments needed for your business. This web application is stored on the Github.com platform.
+* This node.js app utilizes node.js, inquirer, express.js, console.table, and MySQL to allow you to create the employees, roles, and departments needed for your business. This web application is stored on the Github.com platform.
 
 * Also included is a `seed.sql` file to pre-populate the database. This makes the development of individual features much easier.
 
