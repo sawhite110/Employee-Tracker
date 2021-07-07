@@ -1,12 +1,12 @@
 # Employee-Tracker
 
-* This is a command line application that allows the business owner to work with the data input into MySQL. The owner will be able to add, view, and update the employee, their role, and their department.
+* This is a command line application that allows the business owner to work with the data and input the data into MySQL. The owner will be able to add, view, and update the employee, their role, and their department.
 
 ## User Story
 
 * As a business owner, I want to be able to view add and manage employees, their roles, and each department.
 
-* Being able to manage multiple facesets of the business will allow me to be organized and successful.
+* Being able to manage multiple facets of the business will allow me to be organized and successful.
 
 ## Get Started
 
