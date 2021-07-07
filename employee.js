@@ -23,6 +23,8 @@ const mainMenu = () => {
       choices: [
         "Add Employee",
         "View All Employees",
+        "Add Manager",
+        "View Manager",
         "Add Department",
         "View Departments",
         "Add Employee Role",
@@ -44,6 +46,12 @@ const mainMenu = () => {
           break;
         case "View All Employees":
           viewEmployees();
+          break;
+        case "Add Manager":
+          addManager();
+          break;
+        case "View Manager":
+          viewManager();
           break;
         case "Add Department":
           addDepartment();
@@ -211,9 +219,10 @@ const viewEmployees = () => {
     }
   );
 };
+//Function to view the managers of the company
 const viewManager = () => {
   connection.query(
-    `SELECT e.id, e.first_name, e.last_name, r.title, r.salary,COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN role AS r ON e.role_id = r.id LEFT JOIN department AS d ON r.department_id = d.id LEFT JOIN employee AS m ON m.id = e.manager_id`,
+    `SELECT e.id, e.first_name, e.last_name, e.manager_id, COALESCE( CONCAT(m.first_name, " ", m.last_name),'') AS manager FROM employee AS e LEFT JOIN employee AS m ON m.id = e.manager_id`,
     (err, res) => {
       if (err) {
         throw err;
@@ -224,6 +233,7 @@ const viewManager = () => {
     }
   );
 };
+//Function to add the manager
 const addManager = () => {
     inquirer
       .prompt({
@@ -254,6 +264,7 @@ const addManager = () => {
         );
       });
   };
+  //Function to add the department
 const addDepartment = () => {
   inquirer
     .prompt({
@@ -284,6 +295,7 @@ const addDepartment = () => {
       );
     });
 };
+//Function to view departments
 const viewDepartments = () => {
   connection.query(
     // `SELECT d.id, d.name, e.first_name, e.last_name
