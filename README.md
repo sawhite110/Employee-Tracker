@@ -14,10 +14,10 @@
 
 ![Employee Tracker](assets/employee-tracker.gif)
 
+* Video Courtesy of 2U Trilogy Full Stack Coding Boot Camp.
+
 ## Note and Link
 
 * This node.js app utilizes node.js, inquirer, express.js, console.table, and MySQL to allow you to create the employees, roles, and departments needed for your business. This web application is stored on the Github.com platform.
 
 * Also included is a `seed.sql` file to pre-populate the database. This makes the development of individual features much easier.
-
-* You can also reach the app using this link to Heroku: [Unique-Tech-Blog](https://unique-tech-blog.herokuapp.com/)

@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const express = require("express");
 const ctable = require("console.table");
 const app = express();
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
